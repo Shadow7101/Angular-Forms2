@@ -1,20 +1,68 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" >
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
   <div class="row">
-    <div class="col-md-6">
-      <div class="form-group" [class.has-error]="!name.valid && name.touched">
-        <label for="name" class="control-label">Nome</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="Nome completo" [(ngModel)]="usuario.name" required="true" minlength="4" #name="ngModel" />
-        <div *ngIf="!name.valid && name.touched"  class="alert alert-danger">Campo de preenchimento obrigatório</div>
-      </div>
+
+    <div class="col-md-6 form-group" [ngClass]="aplicaCssErro(name)">
+      <label for="name" class="control-label">Nome</label>
+      <input type="text" name="name" id="name" class="form-control" placeholder="Nome completo" [(ngModel)]="usuario.name" required minlength="4" #name="ngModel" />
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched(name)" msgErro="nome é obrigatório"></app-campo-control-erro>
     </div>
-    <div class="col-md-6">
-        <div class="form-group" [class.has-error]="!email.valid && email.touched">
-        <label for="email" class="control-label">Email</label>
-        <input type="email" name="email" id="email" class="form-control" placeholder="Endereço de e-mail" [(ngModel)]="usuario.email" required="true" email #email="ngModel" />
-        <div *ngIf="!email.valid && email.touched" class="alert alert-danger">Campo de preenchimento obrigatório</div>
-      </div>
+
+    <div class="col-md-6 form-group" [ngClass]="aplicaCssErro(email)">
+      <label for="email" class="control-label">Email</label>
+      <input type="email" name="email" id="email" class="form-control" placeholder="Endereço de e-mail" [(ngModel)]="usuario.email" required email #email="ngModel" />
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched(email)" msgErro="email é obrigatório"></app-campo-control-erro>
     </div>
+
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!f.valid"
-  >Submit</button>
+
+  <div ngModelGroup="Endereco">
+
+    <!--linha-->
+    <div class="row">
+      <!--cep-->
+      <div class="col-md-3 form-group" [ngClass]="aplicaCssErro(cep)">
+        <label for="cep" class="control-label">CEP</label>
+        <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP da residencia" [(ngModel)]="usuario.cep" required #cep="ngModel" />
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(cep)" msgErro="cep é obrigatório"></app-campo-control-erro>
+      </div>
+      <!--endereco-->
+      <div class="col-md-6 form-group">
+        <label for="endereco" class="control-label">Endereco</label>
+        <input type="text" name="endereco" id="endereco" class="form-control" disabled [(ngModel)]="usuario.endereco" />
+      </div>
+      <!--numero-->
+      <div class="col-md-3  form-group" [ngClass]="aplicaCssErro(numero)">
+        <label for="numero" class="control-label">numero</label>
+        <input type="text" name="numero" id="numero" class="form-control" placeholder="numero da residencia" [(ngModel)]="usuario.numero" required #numero="ngModel" />
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(numero)" msgErro="número é obrigatório"></app-campo-control-erro>
+      </div>
+    </div>
+
+
+    <!--linha-->
+    <div class="row">
+      <!--complemento-->
+      <div class="col-md-3  form-group">
+        <label for="complemento" class="control-label">complemento</label>
+        <input type="text" name="complemento" id="complemento" class="form-control" placeholder="complemento da residencia" [(ngModel)]="usuario.complemento" #complemento="ngModel" />
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(complemento)" msgErro="complemento é obrigatório"></app-campo-control-erro>
+      </div>
+      <!--bairro-->
+      <div class="col-md-3 form-group">
+        <label for="bairro" class="control-label">Bairro</label>
+        <input type="text" name="bairro" id="bairro" class="form-control" disabled [(ngModel)]="usuario.bairro" />
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="cidade" class="control-label">Cidade</label>
+        <input type="text" name="cidade" id="cidade" class="form-control" disabled [(ngModel)]="usuario.cidade" />
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="bairro" class="control-label">Estado</label>
+        <input type="text" name="estado" id="estado" class="form-control" disabled [(ngModel)]="usuario.estado" />
+      </div>
+    </div>
+
+
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>

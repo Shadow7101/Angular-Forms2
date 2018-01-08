@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateFormComponent {
 
-  usuario:any = {
+  usuario: any = {
     name: null,
     email: null
   };
@@ -15,6 +15,17 @@ export class TemplateFormComponent {
   onSubmit(form): void {
     console.log(form.value);
     console.log(this.usuario);
+  }
+
+  verificaValidTouched(campo) {
+    return !campo.valid && campo.touched;
+  }
+
+  aplicaCssErro(campo) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
   }
 
 }

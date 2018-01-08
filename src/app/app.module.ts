@@ -13,6 +13,7 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { DataFormComponent } from './data-form/data-form.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
+import { CampoControlErroComponent } from './template-form/campo-control-erro/campo-control-erro.component';
 
 
 
@@ -22,7 +23,8 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
     TopMenuComponent,
     TemplateFormComponent,
     DataFormComponent,
-    FormDebugComponent
+    FormDebugComponent,
+    CampoControlErroComponent
   ],
   imports: [
     BrowserModule,
